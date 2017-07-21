@@ -1,0 +1,53 @@
+
+<div class="container" ng-controller="homeCtrl as homeCtrl ">
+    
+    <div>  
+        <form ng-submit="homeCtrl.submit()">
+            <h3>Donnez svp quelques info sur votre film prefere</h3>
+            <label>Nom </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="text" ng-model="homeCtrl.users.nom" placeholder="Nom film ">
+            <br/>
+            <label>Prenom</label>
+            <input type="text" ng-model="homeCtrl.users.prenom" placeholder="Acteur">
+            <br />
+            <label>Telephone</label>
+            <input type="text" ng-model="homeCtrl.users.telephone" placeholder="Annee de sortie">
+            <br/>
+            <label>Adresse</label>
+            <input type="text" ng-model="homeCtrl.users.adresse" placeholder="Adresse">
+            <br/>
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+              
+        </form>
+    </div>
+    <br/>
+    <center><input style="width:40%"  type="text" ng-model="search" placeholder="recherche" /></center>
+    <div style="margin-top:20px">
+        <table border="1">
+            <tr>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>email</th>
+                <th>telephone</th>
+                <th>Option</th>
+            </tr>
+            <tr ng-repeat="user in homeCtrl.ListUsers | filter:search">
+                <td>{{user.nom}}</td>
+                <td>{{user.prenom}}</td>
+                <td>{{user.telephone}}</td>
+                <td>{{user.addresse}}</td>
+                <td>
+                    <a href="#" ng-click="homeCtrl.selectUser(user)" class="btn btn-primary">Edit</a>
+                    <a href="#" ng-click="homeCtrl.removeRow(user.name)" class="btn btn-danger">Delete</a>
+
+                </td>
+               
+            </tr>
+            <tr>
+
+            </tr>
+
+        </table>
+    </div>
+
+</div>

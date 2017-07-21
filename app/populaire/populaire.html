@@ -1,0 +1,32 @@
+
+<div ng-controller="populaireCtrl as populaireCtrl ">
+    <div class="container">
+      
+        <div class="col m8" ng-repeat="var in populaireCtrl.responseWebService | startFrom:(populaireCtrl.currentPage - 1)* populaireCtrl.pageSize | limitTo:populaireCtrl.pageSize">
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <!--<img src="{{var.body}}" alt="...">-->
+                    <p>{{var.body}}</p>
+                    <div class="caption">
+                        <h3>{{var.name}}</h3>
+                        <p><a href="{{var.email}}" class="btn btn-primary" role="button">Url</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <center><ul uib-pagination total-items="populaireCtrl.responseWebService.length" ng-model="populaireCtrl.currentPage" max-size="populaireCtrl.maxSize" items-per-page="populaireCtrl.pageSize" class="pagination-sm" boundary-link-numbers="true" rotate="false"></ul></center>
+    
+</div>
+
+
+
+
+
+
+
+
+
+
+
