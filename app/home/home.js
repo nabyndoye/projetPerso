@@ -9,8 +9,9 @@ var app = angular.module('myApp.home', ['ngRoute'])
         
     }]);
 
-app.service('ServiceForUsers', function ($http) {
+app.service('ServiceForUsers', function ($http,$q) {
 
+      // service qui recup les users dans la base de donnees
        self.GetUsersAll = function () {
            var url = "http://localhost:8080/rest/users/all";
            return $http({
@@ -19,6 +20,8 @@ app.service('ServiceForUsers', function ($http) {
            });
        };
 
+
+      // service qui ajoute  les users dans la bd 
        self.AddUser = function (users) {
            var url = "http://localhost:8080/rest/users/adduser";
            return $http({
@@ -32,6 +35,31 @@ app.service('ServiceForUsers', function ($http) {
                data: angular.toJson(users) 
            });
        };
+
+    // service qui supprime un user dans la bd
+       self.deleteUser = function (id) {
+           var url = "http://localhost:8080/rest/users/deleteUser/"+id;
+           return $http({
+               method: 'DELETE',
+               url: url
+           });
+       };
+
+       // service fait le update
+       self.updateUser = function (id) {
+           var url = "http://localhost:8080/rest/users/updateUser/"+id;
+           return $http({
+               method: 'POST',
+               url: url,
+               transformRequest: angular.identity,
+               transformResponse: angular.identity,
+               headers: {
+                   'Content-Type': 'application/json'
+               },
+               data: angular.toJson(users)
+           });
+       };
+      
 
     });
 
@@ -85,12 +113,27 @@ app.service('ServiceForUsers', function ($http) {
             }
         };
 
-        self.AddTotab = function () {
+        self.deleteUser = function (id) {
 
-            self.ListUsers.push(self.users);
-            console.log('resl', self.ListUsers);
-            self.users = "";
+            deleteUser(id).then(function (response) {
+            });
+
+
         };
+
+        self.updateUser = function () {
+
+            updateUser(id).then(function (response) {
+            });
+        }
+
+
+
+       
+       
+
+       
+
 
 
     }]);
