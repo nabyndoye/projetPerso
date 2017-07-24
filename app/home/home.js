@@ -55,8 +55,7 @@ app.service('ServiceForUsers', function ($http,$q) {
                transformResponse: angular.identity,
                headers: {
                    'Content-Type': 'application/json'
-               },
-               data: angular.toJson(users)
+               }
            });
        };
       
@@ -121,9 +120,10 @@ app.service('ServiceForUsers', function ($http,$q) {
 
         };
 
-        self.updateUser = function () {
+        self.updateUser = function (id) {
 
             updateUser(id).then(function (response) {
+                self.nom = users.nom;
             });
         }
 

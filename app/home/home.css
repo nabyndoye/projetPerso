@@ -18,3 +18,9 @@ th {
     background-color: #4CAF50;
     color: white;
 }
+
+
+
+.form-horizontal input.ng-valid.ng-dirty {
+    border-color: #78FA89;
+}
