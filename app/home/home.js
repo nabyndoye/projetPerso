@@ -32,7 +32,7 @@ app.service('ServiceForUsers', function ($http,$q) {
                headers: {
                    'Content-Type': 'application/json'
                },
-               data: angular.toJson(users) 
+               data: JSON.stringify(users) 
            });
        };
 
@@ -46,26 +46,28 @@ app.service('ServiceForUsers', function ($http,$q) {
        };
 
        // service fait le update
-       self.updateUser = function (id) {
+       self.updateUser = function (id, users) {
            var url = "http://localhost:8080/rest/users/updateUser/"+id;
            return $http({
-               method: 'POST',
+               method: 'PUT',
                url: url,
                transformRequest: angular.identity,
                transformResponse: angular.identity,
                headers: {
                    'Content-Type': 'application/json'
-               }
+               },
+               data: JSON.stringify(users)
            });
        };
       
 
     });
 
-    app.controller('homeCtrl', ['ServiceForUsers', function (ServiceForUsers) {
+app.controller('homeCtrl', ['ServiceForUsers', '$uibModal', '$scope', function (ServiceForUsers,$uibModal,$scope) {
         var self = this;
 
         self.ListUsers = [];
+
 
         self.users = {
             nom: undefined,
@@ -103,29 +105,47 @@ app.service('ServiceForUsers', function ($http,$q) {
             });
         };
 
-        self.AddUser = function (nom,prenom,telephone,adresse) {
-            var data = {
-                nom: nom,
-                prenom: prenom,
-                telephone: telephone,
-                adresse: adresse
-            }
-        };
+        //self.AddUser = function (nom,prenom,telephone,adresse) {
+        //    var data = {
+        //        nom: nom,
+        //        prenom: prenom,
+        //        telephone: telephone,
+        //        adresse: adresse
+        //    }
+        //};
 
         self.deleteUser = function (id) {
 
             deleteUser(id).then(function (response) {
+                console.log("user deleted with id:",id);
             });
 
 
         };
 
-        self.updateUser = function (id) {
-
-            updateUser(id).then(function (response) {
-                self.nom = users.nom;
+        self.updateFormulaire = function () {
+            
+            self.modal_instance = $uibModal.open({
+                templateUrl: 'formulaireUpdate.html', 
+                scope: $scope,
+                backdrop: 'static',
+                keyboard: false
             });
-        }
+        };
+       
+        self.updateUser = function (id, users){
+
+            updateUser(id, users).then(function (response) {
+                console.log("youpppppiiiiiiiiiiii ");
+                
+            }, function () {
+                console.log("failure");
+            
+               }).finally(function () {
+                console.log("finally here ");
+                  
+            });
+        };
 
 
 
