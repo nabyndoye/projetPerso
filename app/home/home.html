@@ -58,22 +58,21 @@
                     <div ng-show="homeCtrl.ListUsers.length>0">
                         <table border="1" ng-cloak>
                             <tr>
-                                <th>Nom</th>
+                                <th>Nom </th>
                                 <th>Prenom</th>
                                 <th>telephone</th>
                                 <th>Adresse</th>
                                 <th>Option</th>
                             </tr>
 
-                            <tr ng-repeat="user in homeCtrl.ListUsers | filter:search">
+                            <tr ng-repeat="user in homeCtrl.ListUsers | filter:search ">
                                 <td>{{user.nom}}</td>
                                 <td>{{user.prenom}}</td>
                                 <td>{{user.telephone}}</td>
                                 <td>{{user.adresse}}</td>
                                 <td>
                                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal"
-                                            ng-click="homeCtrl.selectUser(user)">
-                                        Edit
+                                            ng-click="homeCtrl.selectUser(user)"> Edit   
                                     </button>
 
                                     <a href="#" ng-click="homeCtrl.deleteUser(user.id)" class="btn btn-danger">Delete</a>
@@ -84,7 +83,6 @@
                 </div>
             </div>
         </div>
-
 
 
         <!-- Modal content-->

@@ -35,6 +35,7 @@
         "allocine-api": "^0.1.9",
         "angular-ui-bootstrap": "^2.5.0",
         "angular-utils-pagination": "^0.11.1",
-        "nodemailer": "^4.0.1"
+        "nodemailer": "^4.0.1",
+        "requirejs": "^2.3.4"
     }
 }

@@ -67,12 +67,7 @@ app.controller('homeCtrl', ['ServiceForUsers', '$uibModal', '$scope', function (
 
         self.ListUsers = [];
 
-        self.users = {
-            nom: undefined,
-            prenom: undefined,
-            telephone: undefined,
-            adresse: undefined
-        };
+        
 
         GetUsersAll().then(function (response) {
 
@@ -80,6 +75,14 @@ app.controller('homeCtrl', ['ServiceForUsers', '$uibModal', '$scope', function (
             console.log('resul web service', self.ListUsers);
 
         });
+
+    //submit user with post
+        self.users = {
+            nom: undefined,
+            prenom: undefined,
+            telephone: undefined,
+            adresse: undefined
+        };
 
         self.submit = function () {
 
@@ -101,7 +104,7 @@ app.controller('homeCtrl', ['ServiceForUsers', '$uibModal', '$scope', function (
 
             });
         };
-
+        //FIN  submit user with post
         self.deleteUser = function (id) {
 
             deleteUser(id).then(function (response) {
@@ -126,6 +129,10 @@ app.controller('homeCtrl', ['ServiceForUsers', '$uibModal', '$scope', function (
         self.selectUser = function (user) {
             console.log(user);
             self.clickedUser = user;
+        };
+
+        self.sortBy = function (propertyName) {
+            
         };
 
       
