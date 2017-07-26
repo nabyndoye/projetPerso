@@ -49,7 +49,7 @@ app.service('ServiceForUsers', function ($http,$q) {
        self.updateUser = function (id, users) {
            var url = "http://localhost:8080/rest/users/updateUser/"+id;
            return $http({
-               method: 'PUT',
+               method: 'POST',
                url: url,
                transformRequest: angular.identity,
                transformResponse: angular.identity,
@@ -126,17 +126,28 @@ app.controller('homeCtrl', ['ServiceForUsers', '$uibModal', '$scope', function (
         self.updateFormulaire = function () {
             
             self.modal_instance = $uibModal.open({
-                templateUrl: 'formulaireUpdate.html', 
+                templateUrl: 'home/formulaireUpdate.html',
+               // controller: 'homeCtrl',
                 scope: $scope,
                 backdrop: 'static',
                 keyboard: false
             });
         };
-       
-        self.updateUser = function (id, users){
 
-            updateUser(id, users).then(function (response) {
-                console.log("youpppppiiiiiiiiiiii ");
+        self.closeModal = function () {
+            self.modal_instance.close();
+        };
+       
+        self.updateUser = function (id, clickedUser) {
+            console.log("id", id);
+            updateUser(id, self.clickedUser).then(function (response) {
+                //console.log("youpppppiiiiiiiiiiii ");
+                console.log("object du user a update ", self.clickedUser);
+                self.users = response.data;
+                console.log("object du user a update ", self.users);
+
+                
+                
                 
             }, function () {
                 console.log("failure");
@@ -146,6 +157,13 @@ app.controller('homeCtrl', ['ServiceForUsers', '$uibModal', '$scope', function (
                   
             });
         };
+
+        self.selectUser = function (user) {
+            console.log(user);
+            self.clickedUser = user;
+        };
+
+      
 
 
 

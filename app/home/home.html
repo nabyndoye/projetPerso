@@ -4,7 +4,7 @@
 
 
             <div class="col-md-12">
-             
+
 
                 <form novalidate ng-submit="homeCtrl.submit()" role="form" name="myForm" class="form-horizontal">
                     <br />
@@ -43,11 +43,12 @@
                         </div>
 
                         <button type="submit" ng-disabled="isClean() || myForm.$invalid" value="Ajouter"
-                                class="btn btn-primary">Ajouter
-                            
+                                class="btn btn-primary">
+                            Ajouter
+
                         </button>
 
-                   
+
                     </div>
                 </form>
 
@@ -70,20 +71,88 @@
                                 <td>{{user.telephone}}</td>
                                 <td>{{user.adresse}}</td>
                                 <td>
-                                    <button type="button" ng-click="homeCtrl.updateFormulaire()" class="btn btn-primary" >tette</button>
-                                   <!-- <a href="#" ng-click="homeCtrl.updateFormulaire()" class="btn btn-primary">Edit</a>-->
+                                    <!-- <button type="button" ng-click="homeCtrl.updateFormulaire()" class="btn btn-primary" >Edit</button>-->
+                                    <!-- <a href="#" ng-click="homeCtrl.updateFormulaire()" class="btn btn-primary">Edit</a>-->
+                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal"
+                                            ng-click="homeCtrl.selectUser(user)">
+                                        Edit
+                                    </button>
+
                                     <a href="#" ng-click="homeCtrl.deleteUser(user.id)" class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>
-                            
-                            
-
                         </table>
                     </div>
                 </div>
             </div>
         </div>
+
+
+
+        <!-- Modal content-->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+
+                    <div class="modal-body">
+                        <form  ng-submit="homeCtrl.updateUser(homeCtrl.clickedUser.id)" role="form" name="myForm" class="form-horizontal">
+
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    <input name="name" ng-model="homeCtrl.clickedUser.nom" type="text" class="form-control" placeholder="Nom" />
+                                   
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+
+                                <div class="col-md-4">
+                                    <input name="prenom" ng-model="homeCtrl.clickedUser.prenom" type="text" class="form-control" placeholder="Prenom" />
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+
+                                <div class="col-md-4">
+                                    <input name="telephone" ng-model="homeCtrl.clickedUser.telephone" type="text" class="form-control" placeholder="telephone" />
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+
+                                <div class="col-md-4">
+                                    <input name="adresse" ng-model="homeCtrl.clickedUser.adresse" type="text" class="form-control" placeholder="Your adresse" />
+
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="submit" ng-click="homeCtrl.updateUser(homeCtrl.clickedUser.id)" class="btn btn-default" data-dismiss="modal">Save</button>
+                            </div>
+                        </form>
+
+                    </div>
+                    
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </div>
 </div>
-
-
