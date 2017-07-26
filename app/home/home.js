@@ -45,7 +45,7 @@ app.service('ServiceForUsers', function ($http,$q) {
            });
        };
 
-       // service fait le update
+       // service qui fait  update d'un user
        self.updateUser = function (id, users) {
            var url = "http://localhost:8080/rest/users/updateUser/"+id;
            return $http({
@@ -60,14 +60,12 @@ app.service('ServiceForUsers', function ($http,$q) {
            });
        };
       
-
     });
 
 app.controller('homeCtrl', ['ServiceForUsers', '$uibModal', '$scope', function (ServiceForUsers,$uibModal,$scope) {
         var self = this;
 
         self.ListUsers = [];
-
 
         self.users = {
             nom: undefined,
@@ -98,57 +96,24 @@ app.controller('homeCtrl', ['ServiceForUsers', '$uibModal', '$scope', function (
             }, function () {
                 console.log("failure");
 
-
             }).finally(function () {
                 console.log("finally here ");
 
             });
         };
 
-        //self.AddUser = function (nom,prenom,telephone,adresse) {
-        //    var data = {
-        //        nom: nom,
-        //        prenom: prenom,
-        //        telephone: telephone,
-        //        adresse: adresse
-        //    }
-        //};
-
         self.deleteUser = function (id) {
 
             deleteUser(id).then(function (response) {
                 console.log("user deleted with id:",id);
             });
-
-
         };
-
-        self.updateFormulaire = function () {
-            
-            self.modal_instance = $uibModal.open({
-                templateUrl: 'home/formulaireUpdate.html',
-               // controller: 'homeCtrl',
-                scope: $scope,
-                backdrop: 'static',
-                keyboard: false
-            });
-        };
-
-        self.closeModal = function () {
-            self.modal_instance.close();
-        };
-       
+ 
         self.updateUser = function (id, clickedUser) {
             console.log("id", id);
             updateUser(id, self.clickedUser).then(function (response) {
-                //console.log("youpppppiiiiiiiiiiii ");
                 console.log("object du user a update ", self.clickedUser);
-                self.users = response.data;
-                console.log("object du user a update ", self.users);
-
-                
-                
-                
+               
             }, function () {
                 console.log("failure");
             
